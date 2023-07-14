@@ -48,7 +48,10 @@ function love.update(dt)
     end
 end
 
-function love.draw()    
+function love.draw()
+    -- Draw the background
+    love.graphics.setBackgroundColor(255, 255, 255)  -- White background
+
     -- Draw fish
     love.graphics.draw(birdImage, fish.x, fish.y)
     
