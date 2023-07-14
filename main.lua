@@ -48,7 +48,7 @@ function love.update(dt)
     end
 end
 
-function love.draw()
+function love.draw()    
     -- Draw fish
     love.graphics.draw(birdImage, fish.x, fish.y)
     
