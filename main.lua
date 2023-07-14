@@ -2,8 +2,8 @@
 
 function love.load()
     -- Load assets
-    birdImage = love.graphics.newImage("fish.png")
-    pipeImage = love.graphics.newImage("enemy.png")
+    birdImage = love.graphics.newImage("Assets/fish.png")
+    pipeImage = love.graphics.newImage("Assets/enemy.png")
     
     -- Game variables
     fish = {
