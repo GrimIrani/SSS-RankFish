@@ -20,6 +20,13 @@ function love.load()
     pipes = {}
     pipeSpawnTimer = 0
     pipeInterval = 2
+    
+    -- Camera variables
+    camera = {
+        x = 0,
+        y = 0
+    }
+    cameraFocus = false
 end
 
 function love.update(dt)
@@ -35,6 +42,12 @@ function love.update(dt)
     if pipeSpawnTimer > pipeInterval then
         spawnPipe()
         pipeSpawnTimer = pipeSpawnTimer - pipeInterval
+    end
+    
+    -- Camera movement
+    if cameraFocus then
+        camera.x = fish.x - love.graphics.getWidth() / 2  -- Adjust camera x position
+        camera.y = fish.y - love.graphics.getHeight() / 2  -- Adjust camera y position
     end
     
     -- Pipes movement and collision
@@ -53,6 +66,9 @@ function love.update(dt)
 end
 
 function love.draw()
+    -- Translate the position based on the camera position
+    love.graphics.translate(-camera.x, -camera.y)
+    
     -- Draw the background
     love.graphics.setBackgroundColor(255, 255, 255)  -- White background
 
@@ -63,12 +79,17 @@ function love.draw()
     for _, enemy in ipairs(pipes) do
         love.graphics.draw(pipeImage, enemy.x, enemy.y)
     end
+    
+    -- Reset translation for UI or HUD elements
+    love.graphics.origin()
 end
 
 function love.keypressed(key)
     -- fish flap
     if key == "space" or key == "up" then
         fish.velocity = fish.flapHeight
+    elseif key == "v" then
+        cameraFocus = not cameraFocus  -- Toggle camera focus on/off
     end
 end
 
