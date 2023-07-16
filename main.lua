@@ -9,11 +9,12 @@ function love.load()
     fish = {
         x = 62,
         y = 250,
-        width = birdImage:getWidth(),
-        height = birdImage:getHeight(),
-        yVelocity = 0,
+        width = birdImage:getWidth() - 20,  -- Adjusted collision box width
+        height = birdImage:getHeight() - 20,  -- Adjusted collision box height
+        velocity = 0,
         gravity = 1000,
-        flapHeight = -300
+        flapHeight = -300,
+        rotation = 0
     }
     
     pipes = {}
@@ -23,8 +24,11 @@ end
 
 function love.update(dt)
     -- fish movement
-    fish.yVelocity = fish.yVelocity + fish.gravity * dt
-    fish.y = fish.y + fish.yVelocity * dt
+    fish.velocity = fish.velocity + fish.gravity * dt
+    fish.y = fish.y + fish.velocity * dt
+    
+    -- Rotate fish based on velocity and angle of ascent/descent
+    fish.rotation = math.rad(fish.velocity * 0.1) -- Adjust the rotation factor as desired
     
     -- enemy spawning
     pipeSpawnTimer = pipeSpawnTimer + dt
@@ -52,8 +56,8 @@ function love.draw()
     -- Draw the background
     love.graphics.setBackgroundColor(255, 255, 255)  -- White background
 
-    -- Draw fish
-    love.graphics.draw(birdImage, fish.x, fish.y)
+    -- Draw fish with rotation
+    love.graphics.draw(birdImage, fish.x, fish.y, fish.rotation, 1, 1, fish.width / 2, fish.height / 2)
     
     -- Draw pipes
     for _, enemy in ipairs(pipes) do
@@ -64,7 +68,7 @@ end
 function love.keypressed(key)
     -- fish flap
     if key == "space" or key == "up" then
-        fish.yVelocity = fish.flapHeight
+        fish.velocity = fish.flapHeight
     end
 end
 
@@ -77,8 +81,8 @@ function spawnPipe()
 end
 
 function checkCollision(a, b)
-    return a.x < b.x + pipeImage:getWidth() and
-           a.x + fish.width > b.x and
-           a.y < b.y + pipeImage:getHeight() and
-           a.y + fish.height > b.y
+    return a.x + a.width > b.x + 20 and
+           a.x < b.x + pipeImage:getWidth() - 0 and
+           a.y + a.height > b.y + 20 and
+           a.y < b.y + pipeImage:getHeight() - 0
 end
