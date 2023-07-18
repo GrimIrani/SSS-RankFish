@@ -14,7 +14,11 @@ This game is inspired by a long-ago idea to create a cool and challenging game. 
 
    
 ```
-   love .
+love .
+```
+**OR**
+```
+love file.zip
 ```
 
 5. The game window will open, and you can now start playing!
