@@ -2,23 +2,17 @@
 require("assets")
 require("fish")
 require("pipes")
+require("camera")
 
 function love.load()
-    -- Game variables
-    camera = {
-        x = -100,
-        y = 0
-    }
-    cameraFocus = false
+    -- Empty
 end
 
 function love.update(dt)
     updateFish(dt)
     updatePipes(dt)
-    -- Camera movement
     if cameraFocus then
-        camera.x = fish.x - love.graphics.getWidth() / 2
-        camera.y = fish.y - love.graphics.getHeight() / 2
+        updateCamera(fish, love.graphics.getWidth(), love.graphics.getHeight())
     end
 end
 
