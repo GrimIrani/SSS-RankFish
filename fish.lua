@@ -1,3 +1,4 @@
+-- fish.lua
 fish = {
     x = 62,
     y = 250,
@@ -21,9 +22,19 @@ function drawFish()
 end
 
 function fishKeyPressed(key)
-    if key == "space" or key == "up" then
+    if key == "space" or touch_pressed then
         fish.velocity = fish.flapHeight
     elseif key == "v" then
         cameraFocus = not cameraFocus
     end
+end
+
+function love.touchpressed(id, x, y, dx, dy, pressure)
+    -- Set touch_pressed to true when a touch event occurs
+    touch_pressed = true
+end
+
+function love.touchreleased(id, x, y, dx, dy, pressure)
+    -- Set touch_pressed to false when a touch event ends
+    touch_pressed = false
 end
