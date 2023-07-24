@@ -22,19 +22,9 @@ function drawFish()
 end
 
 function fishKeyPressed(key)
-    if key == "space" or touch_pressed then
+    if key == "space" then
         fish.velocity = fish.flapHeight
     elseif key == "v" then
         cameraFocus = not cameraFocus
     end
-end
-
-function love.touchpressed(id, x, y, dx, dy, pressure)
-    -- Set touch_pressed to true when a touch event occurs
-    touch_pressed = true
-end
-
-function love.touchreleased(id, x, y, dx, dy, pressure)
-    -- Set touch_pressed to false when a touch event ends
-    touch_pressed = false
 end
