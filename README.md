@@ -44,6 +44,6 @@ This project is licensed under the Unlicense! See the [LICENSE](LICENSE) file fo
 ## Acknowledgements
 
 The game was inspired by a tooo~ long-ago idea to make a cool game and built using the Love2D game engine.<br>
-A gift for inner child and my past.
+A gift to inner child and my past.
 
 - Love2D: [https://love2d.org/](https://love2d.org/)
